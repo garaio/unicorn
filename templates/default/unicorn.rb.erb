@@ -69,6 +69,7 @@ stdout_path '<%= @stdout_path %>'
 <%- end %>
 <%- if @logger %>
 # logger
+require "syslog/logger"
 logger <%= @logger %>
 
 <%- end %>
