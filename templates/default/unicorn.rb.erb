@@ -67,10 +67,9 @@ stderr_path '<%= @stderr_path %>'
 stdout_path '<%= @stdout_path %>'
 
 <%- end %>
-<%- if @logger %>
+<%- if @logger_block %>
 # logger
-require "syslog/logger"
-logger <%= @logger %>
+<%= @logger_block %>
 
 <%- end %>
 <%- if @copy_on_write %>
