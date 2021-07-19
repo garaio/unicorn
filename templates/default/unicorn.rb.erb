@@ -35,7 +35,6 @@ user "<%= @forked_user %>"<%= ", \"#{@forked_group}\"" unless @forked_group.nil?
 before_exec do |server|
   <%= @before_exec %>
 end
-
 <%- end %>
 
 <%- if @before_fork %>
@@ -43,21 +42,22 @@ end
 before_fork do |server, worker|
   <%= @before_fork %>
 end
+<%- end %>
 
 <%- if @after_worker_ready %>
 # sets after_worker_ready hook to a given block.
 after_worker_ready do |server, worker|
   <%= @after_worker_ready %>
 end
-
 <%- end %>
+
 <%- if @after_fork %>
 # What to do after we fork a worker
 after_fork do |server, worker|
   <%= @after_fork %>
 end
-
 <%- end %>
+
 <%- if @pid %>
 # Where to drop a pidfile
 pid '<%= @pid %>'
