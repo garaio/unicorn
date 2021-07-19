@@ -34,6 +34,7 @@ The unicorn_config definition manages the configuration template for an applicat
 - as well to use this attribute. Default is nil.
 - `before_exec` - Default is nil.
 - `before_fork` - Default is nil.
+- `after_worker_ready` - Default is nil.
 - `after_fork` - Default is nil.
 - `pid` - Pidfile location. Default is nil.
 - `stderr_path` - Where stderr gets logged. Default is nil.
@@ -65,6 +66,7 @@ node.default[:unicorn][:preload_app] = false
 node.default[:unicorn][:worker_processes] = [node[:cpu][:total].to_i * 4, 8].min
 node.default[:unicorn][:preload_app] = false
 node.default[:unicorn][:before_fork] = 'sleep 1'
+node.default[:unicorn][:after_worker_ready] = 'sleep 1'
 node.default[:unicorn][:port] = '8080'
 node.set[:unicorn][:options] = { :tcp_nodelay => true, :backlog => 100 }
 
@@ -75,6 +77,7 @@ unicorn_config "/etc/unicorn/#{app['id']}.rb" do
   preload_app node[:unicorn][:preload_app]
   worker_processes node[:unicorn][:worker_processes]
   before_fork node[:unicorn][:before_fork]
+  before_fork node[:unicorn][:after_worker_ready]
 end
 ```
 
